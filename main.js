@@ -9,9 +9,12 @@ const pokemonIDs = ['001', '004', '007','143']
 pokemonIDs.map((id) => {
     let imageURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`
     console.log(imageURL)
+    
+    let div = document.createElement('div')
+    div.setAttribute('class', 'pokemon-card')
+
     let img = document.createElement('img')
     img.src = imageURL
-    img.setAttribute('height', '100')
-    img.setAttribute('width', '100')
-    document.body.append(img)
+    div.append(img)
+    document.body.append(div)
 })
