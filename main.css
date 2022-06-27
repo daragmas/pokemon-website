@@ -17,9 +17,16 @@ body{
 .pokemon-card:hover {
     transform: scale(1.05);
     border: 1px solid dodgerblue;
+    cursor: pointer;
 }
 
 .pokemon-card > img{
     height:auto;
-    width:20%;
+    width:300px;
+}
+
+#container{
+    display:flex;
+    gap: 1%;
+    justify-content: center;
 }
