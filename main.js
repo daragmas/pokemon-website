@@ -1,5 +1,3 @@
-// const pokemon = ['bulbasaur', 'charmander', 'squirtle', 'snorlax']
-// const pokemonIDs = ['001', '004', '007','143']
 const pokemonTeam = [
     {name:'Bulbasaur', id:'001'}, 
     {name:'Charmander', id:'004'}, 
@@ -7,6 +5,15 @@ const pokemonTeam = [
     {name:'Snorlax', id:'143'}]
 
 const containerDiv = document.querySelector('#container')
+const newBtn = document.querySelector('#new-pokemon-btn')
+const rosterDiv = document.querySelector('#roster')
+
+newBtn.addEventListener('click', () => {
+    let num = prompt('Enter National Pokedex Number')
+    // let newName = ???;
+    let newPokemon = {name:newName, id:num}
+    pokemonTeam.add(newPokemon)
+})
 
 //loop over all ids, 
 //create html element, 
@@ -25,6 +32,18 @@ pokemonTeam.map((element,index) => {
 
     let img = document.createElement('img')
     img.src = imageURL
-    div.append(img, h3)
+
+    let audioURL = `https://play.pokemonshowdown.com/audio/cries/${element.name.toLowerCase()}.mp3`
+    let audio = document.createElement('audio')
+    let source = document.createElement('source')
+    source.setAttribute('src', audioURL)
+    source.setAttribute('type', 'audio/mpeg')
+    audio.append(source)
+    
+    div.addEventListener('click', () => {
+        audio.play()
+    })
+
+    div.append(audio, img, h3)
     containerDiv.append(div)
 })

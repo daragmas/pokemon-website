@@ -30,3 +30,14 @@ body{
     gap: 1%;
     justify-content: center;
 }
+
+#roster{
+    display: flex;
+    justify-content: center;
+}
+
+div[id^="pokemon-"]{
+    height:100px;
+    width:100px;
+    border: 1px solid #ccc;
+}
