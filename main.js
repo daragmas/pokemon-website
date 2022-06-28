@@ -7,12 +7,20 @@ const pokemonTeam = [
 const containerDiv = document.querySelector('#container')
 const newBtn = document.querySelector('#new-pokemon-btn')
 const rosterDiv = document.querySelector('#roster')
+const userRoster = []
 
 newBtn.addEventListener('click', () => {
     let num = prompt('Enter National Pokedex Number')
-    // let newName = ???;
-    let newPokemon = {name:newName, id:num}
-    pokemonTeam.add(newPokemon)
+    if (num<10){num = `00${num}`}
+    else if(num<100){num = `0${num}`}
+    console.log(num)
+    let imageURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${num}.png`
+    let img = document.createElement('img')
+    img.setAttribute('src', imageURL)
+    img.setAttribute('class', 'roster-img')
+    let position = document.querySelector(`#pokemon-${userRoster.length+1}`)
+    position.append(img)
+    userRoster.push(num)
 })
 
 //loop over all ids, 
