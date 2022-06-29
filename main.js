@@ -1,7 +1,3 @@
-/*
-In the Pokemon roster section, allow the user to nickname Pokemon in their roster. The user interface (webpage) should display the nickname instead of the Pokemon name if the Pokemon has a nickname.
-*/
-
 const pokemonTeam = [
     {name:'Bulbasaur', id:'001'}, 
     {name:'Charmander', id:'004'}, 

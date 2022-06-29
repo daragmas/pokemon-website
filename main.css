@@ -55,3 +55,8 @@ div[id^="pokemon-"] button{
     height: 100px;
     width: 100px;
 }
+
+#new-pokemon-btn{
+    display: flex;
+    margin: 5px auto;
+}
