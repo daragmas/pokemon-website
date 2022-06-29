@@ -65,6 +65,11 @@ newBtn.addEventListener('click', async () => {
                 position.removeChild(removeBtn)
         }})
 
+        h3.addEventListener('click', ()=>{
+            h3.innerText = prompt("Enter nickname ", `${h3.innerText}`)
+            if (h3.innerText == ''){h3.innerText = name}
+        })
+
     }
     else{
         alert('Your team is full! Transfer a pokemon to the PC to add a new one.')
