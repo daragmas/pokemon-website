@@ -23,6 +23,7 @@ newBtn.addEventListener('click', async () => {
             let name = res.species.name
             let h3 = document.createElement('h3')
             h3.innerText = name
+            h3.className = 'pokemon-name'
 
             if (`${num}`.length < 3) {
                 if (num < 10) { num = `00${num}` }
@@ -49,6 +50,7 @@ newBtn.addEventListener('click', async () => {
             function cry() {
                 audio.play()
             }
+            
 
             position.addEventListener('click', cry)
             
@@ -67,7 +69,7 @@ newBtn.addEventListener('click', async () => {
                 {
                     let rosterIndex = `${position.id}`
                     rosterIndex = rosterIndex.split('-')[1]-1
-                    console.log(rosterIndex)
+                    // console.log(rosterIndex)
                     userRoster[rosterIndex] = ''
 
                     position.removeChild(img)
@@ -89,6 +91,7 @@ newBtn.addEventListener('click', async () => {
     } 
 })
 
+/*
 pokemonTeam.map((element,index) => {
     let imageURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${element.id}.png`
     // console.log(pokemon[index])
@@ -115,4 +118,4 @@ pokemonTeam.map((element,index) => {
 
     div.append(audio, img, h3)
     containerDiv.append(div)
-})
+})*/

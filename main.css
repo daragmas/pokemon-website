@@ -60,3 +60,7 @@ div[id^="pokemon-"] button{
     display: flex;
     margin: 5px auto;
 }
+
+.pokemon-name{
+    text-transform: capitalize;
+}
