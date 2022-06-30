@@ -10,63 +10,78 @@ const rosterDiv = document.querySelector('#roster')
 const userRoster = []
 
 newBtn.addEventListener('click', async () => {
-    if(userRoster.length <6){
+    if(userRoster.length <6 || userRoster.includes('')){
         let num = prompt('Enter National Pokedex Number')
-        let apiURL = `https://pokeapi.co/api/v2/pokemon/${num}`
-        let req = await fetch(apiURL)
-        let res = await req.json()
-        let name = res.species.name
-        let h3 = document.createElement('h3')
-        h3.innerText = name
-
-        if (num.length < 3) {
-            if (num < 10) { num = `00${num}` }
-            else if (num < 100) { num = `0${num}` }
+        if (num>905 || num < 0||!(parseInt(num))||parseInt(num)!=num){
+            alert('Invalid Input. Please input a number between 1 and 905')
         }
+        else{
+            num=parseInt(num)
+            let apiURL = `https://pokeapi.co/api/v2/pokemon/${num}`
+            let req = await fetch(apiURL)
+            let res = await req.json()
+            let name = res.species.name
+            let h3 = document.createElement('h3')
+            h3.innerText = name
 
-        let imageURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${num}.png`
+            if (`${num}`.length < 3) {
+                if (num < 10) { num = `00${num}` }
+                else if (num < 100) { num = `0${num}` }
+            }
 
-        let img = document.createElement('img')
-        img.setAttribute('src', imageURL)
-        img.setAttribute('class', 'roster-img')
-        let position = document.querySelector(`#pokemon-${userRoster.length + 1}`)
+            let imageURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${num}.png`
 
-        let audioURL = `https://play.pokemonshowdown.com/audio/cries/${name}.mp3`
-        let audio = document.createElement('audio')
-        let source = document.createElement('source')
-        source.setAttribute('src', audioURL)
-        source.setAttribute('type', 'audio/mpeg')
-        audio.append(source)
+            let img = document.createElement('img')
+            img.setAttribute('src', imageURL)
+            img.setAttribute('class', 'roster-img')
+            
+            let position
+            if (userRoster.length < 6){position = document.querySelector(`#pokemon-${userRoster.length + 1}`)}
+            else {position = document.querySelector(`#pokemon-${userRoster.indexOf('')+1}`)}
 
-        position.addEventListener('click', () => {
-            audio.play()
-        })
+            let audioURL = `https://play.pokemonshowdown.com/audio/cries/${name}.mp3`
+            let audio = document.createElement('audio')
+            let source = document.createElement('source')
+            source.setAttribute('src', audioURL)
+            source.setAttribute('type', 'audio/mpeg')
+            audio.append(source)
 
-        let removeBtn = document.createElement('button')
-        removeBtn.innerHTML = 'X'
-        removeBtn.type = 'submit'
-        
-        position.append(audio, img, h3, removeBtn)
-        userRoster.push(num)
+            function cry() {
+                audio.play()
+            }
 
-        removeBtn.addEventListener('click', () => {
-            if (confirm(`Are you sure you want to remove ${name}?`))
-            {
-                let rosterIndex = userRoster.indexOf(num)
-                userRoster.splice(rosterIndex)
+            position.addEventListener('click', cry)
+            
+            let removeBtn = document.createElement('button')
+            removeBtn.innerHTML = 'X'
+            removeBtn.type = 'submit'
+            removeBtn.className = 'remove-pokemon-btn'
+            
+            position.append(audio, img, h3, removeBtn)
 
-                position.removeChild(img)
-                position.removeChild(h3)
-                position.removeChild(audio)
-                position.removeChild(removeBtn)
-        }})
+            if (userRoster.length<6){userRoster.push(num)}
+            else{userRoster[userRoster.indexOf('')] = num}
 
-        h3.addEventListener('click', ()=>{
-            h3.innerText = prompt("Enter nickname ", `${h3.innerText}`)
-            if (h3.innerText == ''){h3.innerText = name}
-        })
+            removeBtn.addEventListener('click', () => {
+                if (confirm(`Are you sure you want to remove ${h3.innerText}?`))
+                {
+                    let rosterIndex = userRoster.indexOf(num)
+                    userRoster[rosterIndex] = ''
 
-    }
+                    position.removeChild(img)
+                    position.removeChild(h3)
+                    position.removeChild(audio)
+                    position.removeEventListener('click', cry)
+                    position.removeChild(removeBtn)
+            }})
+
+            h3.addEventListener('click', ()=>{
+                let currentName = h3.innerText
+                h3.innerText = prompt("Enter nickname ", `${h3.innerText}`)
+                if (h3.innerText == ''){h3.innerText = currentName}
+            })
+
+    }}
     else{
         alert('Your team is full! Transfer a pokemon to the PC to add a new one.')
     } 
