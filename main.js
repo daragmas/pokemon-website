@@ -34,11 +34,11 @@ newBtn.addEventListener('click', async () => {
             let img = document.createElement('img')
             img.setAttribute('src', imageURL)
             img.setAttribute('class', 'roster-img')
-            
+
             let position
             if (userRoster.length < 6){position = document.querySelector(`#pokemon-${userRoster.length + 1}`)}
             else {position = document.querySelector(`#pokemon-${userRoster.indexOf('')+1}`)}
-
+            // console.log(position)
             let audioURL = `https://play.pokemonshowdown.com/audio/cries/${name}.mp3`
             let audio = document.createElement('audio')
             let source = document.createElement('source')
@@ -65,7 +65,9 @@ newBtn.addEventListener('click', async () => {
             removeBtn.addEventListener('click', () => {
                 if (confirm(`Are you sure you want to remove ${h3.innerText}?`))
                 {
-                    let rosterIndex = userRoster.indexOf(num)
+                    let rosterIndex = `${position.id}`
+                    rosterIndex = rosterIndex.split('-')[1]-1
+                    console.log(rosterIndex)
                     userRoster[rosterIndex] = ''
 
                     position.removeChild(img)
